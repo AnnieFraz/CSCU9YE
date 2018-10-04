@@ -1,0 +1,22 @@
+
+def random_sol(n):
+    random_array = []
+    for i in range(n):
+        number = rnd.randint(0, 1)
+        random_array.append(number)
+    return random_array
+
+def random_sol_valid(n):    
+	binvalid = True    
+	while binvalid:        
+		s = random_sol(n)        
+		v, w = evaluate(s)        
+		binvalid = (w > cap)    
+	return s, v, w
+	
+random_sol_valid(5)
+'''	
+def random_search_valid(tries):
+	binvalid = True
+	while binvalid:
+'''
