@@ -99,7 +99,7 @@ def random_sol_valid(n):
 		s = random_sol(n)        
 		v, w = evaluate(s)        
 		binvalid = (w > cap)
-	print 'RANDOM SOL Value: ', v, 'WEIGHT:',w, s
+	print 'RANDOM SOL Value: ', v, 'WEIGHT:',w
 	return s, v, w
 
 
@@ -139,10 +139,9 @@ def local_optima(sol):
         n_best_value, n_best_weight = evaluate(n_sol)
         if n_best_value > best_value and n_best_weight <= cap:
             best_sol = True
-
         else:
             best_sol = False
-            sol = n_sol
+            sol = n_sol[:]
             n_sol = []
    
     print 'LOCAL OPTIMA: Value -', n_best_value, ' Weight-', best_weight
@@ -208,7 +207,36 @@ def random_valid_neig(sol):
     
 
 def hill_climbing():
+    local_optimal = False
 
+    solution = []
+    solution_value = 0
+    solution_weight = 0
+
+    solution_neighbour = []
+    neighbout_weight = 0
+    neighbour_value =0
+
+    list_of_value = []
+
+    hill_climbed = False
+
+    while (local_optimal != True):
+        solution = random_sol_valid(nitems)
+        solution_value, solution_weight = evaluate(solution)
+        solution_neighbour, neighbour_weight, neighbour_value = random_valid_neig(solution)
+        if (neighbour_value > solution_value and neighbour_weight <=cap):
+            list_of_value.append(neighbour_value)
+            solution = solution_neighbour[:]
+            local_optima(solution)
+            local_optimal = True
+        else:
+            local_optimal = false
+        print list_of_value
+    return solution, list_of_value
+        
+#def multi_hc(tries):
+    
     
 #*******PRACTICAL 3 *****
 #THE Box plot wants the values
@@ -227,7 +255,14 @@ best_sol = local_optima(sol2)
 #RANDOM VALID NEIGHBOUR
 print 'RANDOM VALID NEIGHBOUR'
 solRVN, best_valueRVN, best_weightRVN = random_valid_neig(sol2)
-    
+#Hill Climbing
+hill_sol, valuing = hill_climbing()
+print hill_sol
+
+
+plt.figure()
+plt.plot(valuing)
+plt.show()
 
 knapsack, weight = constructive(nitems, cap, values, weights)
 
