@@ -68,7 +68,7 @@ def random_sol(n):
     return random_array
 
 #TASK4
-def evaulate(sol):
+def evaluate(sol):
     total_value = 0
     total_wei = 0
     for i in range(len(sol)):
@@ -85,7 +85,7 @@ def random_search(tries):
     bestSol = []
     for i in range(tries):
         array = random_sol(tries)
-        total_val, total_wei = evaulate(array)
+        total_val, total_wei = evaluate(array)
         if (total_val > best_val and total_wei<=cap):
                 best_val = total_val
                 best_weight = total_wei
@@ -93,44 +93,142 @@ def random_search(tries):
     return best_val, best_weight, bestSol
     
 #LAB3
-def random_sol_valid(n):    
+def random_sol_valid(n):
 	binvalid = True    
 	while binvalid:        
 		s = random_sol(n)        
-		v, w = evaulate(s)        
+		v, w = evaluate(s)        
 		binvalid = (w > cap)
-	print 's',s
-	print 'v', v
-	print 'w', w
+	print 'RANDOM SOL Value: ', v, 'WEIGHT:',w, s
 	return s, v, w
-	
-random_sol_valid(5)
+
 
 #LAB3 Task 1
 def random_search_valid(tries):
-    print 'random_search_valid'
     bin_valid = True
     best_val = 0
     best_wei = 0
     best_sol =[]
-    while bin_valid:
-        for i in range(tries):
+    #while bin_valid:
+    for i in range(tries):
             array, total_val, total_wei = random_sol_valid(tries)
             #total_val, total_wei = evaulate(array)
-            if (total_val > best_val and total_wei<=cap):
+            if total_val > best_val and total_wei<=cap:
                 best_val = total_val
                 best_weight = total_wei
                 best_sol = array
                 #bin_valid = (total_wei ,)
-    print 'values', values
-    print 'best solution', best_sol
-    print 'best value', best_val
-    print 'best weight', best_wei
+    print 'RANDOM SEARCH, Values - ', values,  'best value', best_val, 'best weight', best_wei
     return values, best_sol, best_val, best_wei
 
-random_search_valid(5)
+def local_optima(sol):
+    best_sol = False
+    best_weight = 0
+    best_value = 0
+    n_best_weight = 0
+    n_best_value = 0 
+    n_sol = []
+
+    while best_sol != True:
+        best_value, best_weight = evaluate(sol)
+        for i in range(len(sol)):
+            if (sol[i] == 0):
+                n_sol.append(1)
+            else:
+                n_sol.append(0)
+        n_best_value, n_best_weight = evaluate(n_sol)
+        if n_best_value > best_value and n_best_weight <= cap:
+            best_sol = True
+
+        else:
+            best_sol = False
+            sol = n_sol
+            n_sol = []
+   
+    print 'LOCAL OPTIMA: Value -', n_best_value, ' Weight-', best_weight
+    print 'LOCAL OPTIMA Better solution? ', best_sol
+    return best_sol
+
+
+
+def random_valid_neig(sol):
+    random_point = rnd.randint(0, len(sol)-1)
+    n_sol = []
+    n_best_weight = 0
+    n_best_value = 0
+    best_value = 0
+    best_weight = 0
+    best_sol = False
+    binvalid = False
+    
+    while binvalid != True:
+        print 'here'
+        print sol
+        best_value, best_weight = evaluate(sol[0])
+        print best_value
+        n_sol = sol
+        print sol[random_point]
+        if (sol[0][random_point] == 0):
+            n_sol[0][random_point] = 1
+            print 'yeet'
+        elif(sol[0][random_point] == 1):
+            n_sol[0][random_point] = 0
+            print 'hello'
+        print n_sol
+
+        n_best_value, n_best_weight = evaluate(n_sol[0])
+        if n_best_value > best_value and n_best_weight <= cap:
+            best_sol = True
+            binvalid = True
+        
+        else:
+            best_sol = False
+            binvalid = False
+            
+
+    print 'RANDOM VALID NEIGHBOUR best_value', n_best_value
+    print 'RANDOM VALID NEIGHBOUR sol', n_sol
+    print 'RANDOM VALID NEIGHBOUR best_weight', n_best_weight
+    print 'RANDOM VALID NEIGHBOUR Better solution? ', best_sol
+    return n_sol, n_best_weight, n_best_value
+    
+
+'''
+        n_best_value, n_best_weight = evaluate(n_sol)
+        if n_best_value > best_value and n_best_weight <= cap:
+            best_sol = True
+            binvalid = True
+            return n_sol, n_best_value, n_best_weight
+        else:
+            best_sol = False
+            binvalid = False
+            return sol, best_value, best_weight
+'''
+       
+    
+
+def hill_climbing():
+
+    
+#*******PRACTICAL 3 *****
+#THE Box plot wants the values
+
+#RANDOM SOL VALID METHOD
+print 'RANDOM SOL VALID METHOD'
+random_sol_valid(nitems)
+#RANDOM SEARCH VALID METHOD
+print  'RANDOM SEARCH VALID METHOD'
+random_search_valid(nitems)
+#LOCAL OPTIMA
+sol, value, weight = random_sol_valid(nitems)
+sol2 = random_sol_valid(5)
+print 'LOCAL OPTIMA METHOD'
+best_sol = local_optima(sol2)
+#RANDOM VALID NEIGHBOUR
+print 'RANDOM VALID NEIGHBOUR'
+solRVN, best_valueRVN, best_weightRVN = random_valid_neig(sol2)
+    
 
 knapsack, weight = constructive(nitems, cap, values, weights)
-print "knapsack: ", knapsack
-print 'weight', weight
+
 
