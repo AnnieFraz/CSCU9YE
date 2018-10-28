@@ -1,0 +1,96 @@
+% Modified version of the vote dataset to include only a subset of 20 instances
+%
+% 1. Title: 1984 United States Congressional Voting Records Database
+% 
+% 2. Source Information:
+%     (a) Source:  Congressional Quarterly Almanac, 98th Congress, 
+%                  2nd session 1984, Volume XL: Congressional Quarterly Inc. 
+%                  Washington, D.C., 1985.
+%     (b) Donor: Jeff Schlimmer (Jeffrey.Schlimmer@a.gp.cs.cmu.edu)
+%     (c) Date: 27 April 1987 
+% 
+% 3. Past Usage
+%    - Publications
+%      1. Schlimmer, J. C. (1987).  Concept acquisition through 
+%         representational adjustment.  Doctoral dissertation, Department of 
+%         Information and Computer Science, University of California, Irvine, CA.
+%         -- Results: about 90%-95% accuracy appears to be STAGGER's asymptote
+%      - Predicted attribute: party affiliation (2 classes)
+% 
+% 4. Relevant Information:
+%       This data set includes votes for a subset of the U.S. House of
+%       Representatives Congressmen on the 16 key votes identified by the
+%       CQA.  The CQA lists nine different types of votes: voted for, paired
+%       for, and announced for (these three simplified to yea), voted
+%       against, paired against, and announced against (these three
+%       simplified to nay), voted present, voted present to avoid conflict
+%       of interest, and did not vote or otherwise make a position known
+%       (these three simplified to an unknown disposition).
+% 
+% 5. Number of Instances: 435 (267 democrats, 168 republicans)
+% 
+% 6. Number of Attributes: 16 + class name = 17 (all Boolean valued)
+% 
+% 7. Attribute Information:
+%    1. Class Name: 2 (democrat, republican)
+%    2. handicapped-infants: 2 (y,n)
+%    3. water-project-cost-sharing: 2 (y,n)
+%    4. adoption-of-the-budget-resolution: 2 (y,n)
+%    5. physician-fee-freeze: 2 (y,n)
+%    6. el-salvador-aid: 2 (y,n)
+%    7. religious-groups-in-schools: 2 (y,n)
+%    8. anti-satellite-test-ban: 2 (y,n)
+%    9. aid-to-nicaraguan-contras: 2 (y,n)
+%   10. mx-missile: 2 (y,n)
+%   11. immigration: 2 (y,n)
+%   12. synfuels-corporation-cutback: 2 (y,n)
+%   13. education-spending: 2 (y,n)
+%   14. superfund-right-to-sue: 2 (y,n)
+%   15. crime: 2 (y,n)
+%   16. duty-free-exports: 2 (y,n)
+%   17. export-administration-act-south-africa: 2 (y,n)
+% 
+% 
+@relation vote
+@attribute 'ID' string
+@attribute 'handicapped-infants' { 'n', 'y'}
+@attribute 'water-project-cost-sharing' { 'n', 'y'}
+@attribute 'adoption-of-the-budget-resolution' { 'n', 'y'}
+@attribute 'physician-fee-freeze' { 'n', 'y'}
+@attribute 'el-salvador-aid' { 'n', 'y'}
+@attribute 'religious-groups-in-schools' { 'n', 'y'}
+@attribute 'anti-satellite-test-ban' { 'n', 'y'}
+@attribute 'aid-to-nicaraguan-contras' { 'n', 'y'}
+@attribute 'mx-missile' { 'n', 'y'}
+@attribute 'immigration' { 'n', 'y'}
+@attribute 'synfuels-corporation-cutback' { 'n', 'y'}
+@attribute 'education-spending' { 'n', 'y'}
+@attribute 'superfund-right-to-sue' { 'n', 'y'}
+@attribute 'crime' { 'n', 'y'}
+@attribute 'duty-free-exports' { 'n', 'y'}
+@attribute 'export-administration-act-south-africa' { 'n', 'y'}
+@attribute 'Affiliation' { 'democrat', 'republican'}
+@data
+'A','n','y','n','y','y','y','n','n','n','y','n','y','y','y','n','y','republican'
+'B','n','y','y','n','y','y','n','n','n','n','n','n','y','y','y','y','democrat'
+'C','n','y','n','y','y','y','n','n','n','n','n','y','y','y','n','y','republican'
+'D','y','y','y','n','n','n','y','y','y','n','y','n','n','n','y','y','democrat'
+'E','y','y','y','n','n','n','y','y','y','n','n','n','n','n','y','y','democrat'
+'F','y','n','y','n','n','n','y','y','y','y','n','n','n','n','y','y','democrat'
+'G','y','n','y','n','n','n','y','y','y','n','y','n','n','n','y','y','democrat'
+'H','y','y','y','n','n','n','y','y','y','n','y','n','n','n','y','y','democrat'
+'I','y','n','n','y','y','n','y','y','y','n','n','y','y','y','n','y','republican'
+'J','y','y','y','n','n','n','y','y','y','n','y','n','n','n','y','y','democrat'
+'K','n','y','n','y','y','y','n','n','n','n','n','y','y','y','n','n','republican'
+'L','y','y','y','n','n','n','y','y','y','y','n','n','y','n','y','y','democrat'
+'M','n','y','n','y','y','y','n','n','n','n','n','y','y','y','n','y','republican'
+'N','n','y','n','y','y','y','n','n','n','n','n','y','y','y','n','n','republican'
+'O','y','y','n','y','y','y','n','n','n','n','n','n','y','y','n','y','republican'
+'P','n','y','n','y','y','y','n','n','n','y','n','y','y','y','n','n','republican'
+'Q','y','n','y','n','n','n','y','y','y','y','y','n','y','n','y','y','democrat'
+'R','n','y','n','y','y','y','n','n','n','y','y','y','y','y','n','n','republican'
+'S','n','y','n','y','y','y','n','n','n','y','y','y','y','y','n','y','republican'
+'T','n','y','n','y','y','y','n','n','n','y','n','y','y','y','n','y','republican'
+%
+%
+%
